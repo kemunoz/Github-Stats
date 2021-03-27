@@ -19,7 +19,8 @@
   "homepage": "https://github.com/kemunoz/Github-Stats#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "helmet": "^4.4.1"
+    "helmet": "^4.4.1",
+    "node-fetch": "^2.6.1"
   },
   "devDependencies": {
     "morgan": "^1.10.0",
