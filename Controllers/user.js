@@ -1,4 +1,3 @@
-const express = require('express');
 const fetch = require('node-fetch');
 
 exports.stats = async (req, res, next) => {
