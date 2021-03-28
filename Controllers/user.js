@@ -18,6 +18,11 @@ exports.stats = async (req, res, next) => {
     while (repoCount === 30) {
         let response = await fetch(`http://api.github.com/users/${username}/repos?per_page=30&page=${page}`);
         let json = await response.json();
+        if (!json.length) {
+            res.status(404).json({
+                message: 'Not Found'
+            });
+        }
         const result = json.filter(data => {
             if (!forked) return data.forks === 0;
             return true;
@@ -26,6 +31,7 @@ exports.stats = async (req, res, next) => {
         repoCount = json.length;
         page++;
     }
+
     repos.forEach(repo => {
         starGazerCount += repo.stargazers_count;
         forkCount += repo.forks_count;
