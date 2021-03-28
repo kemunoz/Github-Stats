@@ -3,14 +3,18 @@ const fetch = require('node-fetch');
 exports.stats = async (req, res, next) => {
     const forked = req.query.forked ? false : true;
     const { username } = req.params;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
     var sortedLanguages,
         repos = [],
-        languageCount = {};
+        languageCount = {},
+        sizeString,
+        i;
 
     var starGazerCount = 0,
         forkCount = 0,
         totalSize = 0,
-        averageSize = 0,
+        averageSize,
+        averageBytes,
         repoCount = 30,
         page = 1;
 
@@ -49,13 +53,17 @@ exports.stats = async (req, res, next) => {
 
     sortedLanguages = Object.keys(languageCount).sort((a, b) => languageCount[a] - languageCount[b]);
     repoCount = repos.length;
-    averageSize = Math.round(totalSize / repoCount);
+    // Calculate average size of repos
+    averageBytes = Math.floor(totalSize / repoCount) * 1000;
+    i = Math.floor(Math.log(averageBytes) / Math.log(1024));
+    averageSize = (averageBytes / Math.pow(1024, i));
+    sizeString = `${averageSize.toFixed(2)}` + sizes[i];
 
     res.status(200).json({
         repoCount,
         starGazerCount,
         forkCount,
         languages: sortedLanguages.reverse(),
-        average_size: averageSize
+        average_size: sizeString
     });
 };
