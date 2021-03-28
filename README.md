@@ -9,6 +9,10 @@ git clone https://github.com/kemunoz/Github-Stats.git
 ```bash
 npm install
 ```
+3. Start API
+'''
+npm start
+'''
 # Endpoints
 
 GET /users/{username} <br />
