@@ -47,7 +47,12 @@ Status: 200 OK
         "Standard ML",
         "JavaScript"
     ],
-    "average_size": "17983"
+    "average_size": "1.79MB"
 }
 ```
-`languages` is sorted by most used to least used
+
+`repoCount` the total amoutn of repos<br />
+`starGazerCount` total star gazers for all repos<br />
+`forkCount` total fork count for all repositories<br />
+`languages` is sorted by most used to least used<br />
+`average_size` average size for all repositories<br />
