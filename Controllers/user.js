@@ -1,8 +1,8 @@
 const fetch = require('node-fetch');
 
 exports.stats = async (req, res, next) => {
-    const forked = req.query.forked ? false : true;
     const { username } = req.params;
+    const forked = req.query.forked === 'false' ? false : true;
     const sizes = ['Bytes', 'KB', 'MB', 'GB'];
     var sortedLanguages,
         repos = [],
