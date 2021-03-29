@@ -7,6 +7,13 @@ const userRoutes = require('./routes/user');
 // app.use(morgan('dev'));
 
 app.use(helmet());
+app.use((req, res, next) => {
+    if (req.method === 'OPTIONS') {
+        res.header('Access-Control-Allow-Methods', 'GET');
+        return res.status(200).json({});
+    }
+    next();
+})
 
 
 app.use('/users', userRoutes);
