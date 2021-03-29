@@ -19,6 +19,7 @@ GET /users/{username} <br />
 Lists repository stats for {username}<br />
 Params<br />
 `forked` if set to false returns stats only for repos that are not forked<br />
+if forked is set to any other value it will simply return statistics for all repos<br />
 ### Example Code
 ```js
 const resp = fetch(http://localhost:3000/users/{username}, {
@@ -49,3 +50,4 @@ Status: 200 OK
     "average_size": "17983"
 }
 ```
+`languages` is sorted by most used to least used
