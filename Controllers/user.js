@@ -27,7 +27,7 @@ exports.stats = async (req, res, next) => {
             });
         }
         const result = json.filter(data => {
-            if (!forked) return data.forks === 0;
+            if (!forked) return !data.fork;
             return true;
         });
         repos = [...repos, ...result];
