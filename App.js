@@ -2,9 +2,9 @@ const express = require('express');
 const app = express();
 const helmet = require('helmet');
 const userRoutes = require('./routes/user');
-// const morgan = require('morgan');
-// Middleware logger
-// app.use(morgan('dev'));
+const morgan = require('morgan');
+
+app.use(morgan('dev'));
 
 app.use(helmet());
 app.use((req, res, next) => {
