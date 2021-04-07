@@ -7,16 +7,20 @@ exports.getStats = (username, forked) => {
         let repos = [];
         while (count == 100) {
             let response = await fetch(`http://api.github.com/users/${username}/repos?per_page=100&page=${page}`);
+            if (response.status == 404) {
+                return reject({ message: "USER NOT FOUND" });
+            }
             let json = await response.json();
             repos = [...repos, ...json];
-            count = json.length;
             page++;
+            count = json.length;
         }
+        if (repos.length == 0) return reject({ message: 'USER HAS NO REPOS' });
         let response = repos.filter(data => {
             if (!forked) return !data.fork;
             return true;
         });
-        repos.length != 0 ? resolve(response) : reject({ message: "USER DOES NOT EXIST OR HAS NO REPOS" });
+        resolve(response);
     });
 }
 
